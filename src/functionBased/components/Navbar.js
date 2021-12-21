@@ -19,6 +19,7 @@ const links = [
 
 
 const Navbar = () => {
+  const isActive = false
   const [navbarOpen, setNavbarOpen] = useState(false)
 
   const handleToggle = () => {
@@ -44,8 +45,8 @@ const Navbar = () => {
           <li key={link.id}>
             <NavLink 
               to={link.path} 
-              className="active-link" 
               onClick={() => closeMenu()}
+              style={ (isActive) => ({color: isActive ? 'red' : '#fff'}) }
               >
               {link.text}
             </NavLink>
