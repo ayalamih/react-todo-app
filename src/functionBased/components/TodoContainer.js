@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
+import { Routes, Route, useLocation } from "react-router-dom"
 
 import {v4 as uuidv4} from 'uuid'
 
-import TodosList from '../functionBased/components/TodosList'
-import Header from '../functionBased/components/Header'
-import InputTodo from '../functionBased/components/InputTodo'
+import TodosList from './TodosList'
+import Header from './Header'
+import InputTodo from './InputTodo'
+import Navbar from "./Navbar"
+import TodoContainers from "./TodoContainers"
 
-import About from "./About"
-import NotMatch from "./NotMatch"
+import About from "../../pages/About"
+import NotMatch from "../../pages/NotMatch"
+import SinglePage from "../../pages/SinglePage"
 
 const TodoContainer = () => {
   const [todos, setTodos] = useState(getInitialTodos())
@@ -76,18 +80,19 @@ const TodoContainer = () => {
     }, [todos])
 
   return (
-    <div className="container">
-      <div className="inner">
-        <Header />
-        <InputTodo addTodoProps={addTodoItem} />
-        <TodosList
-          todos={todos}
-          handleChangeProps={handleChange}
-          delTodoProps={delTodo}
-          setUpdate={setUpdate}
-        />
-      </div>
-    </div>
+    <>
+    <Navbar />
+    <Fragment>
+    <Routes>
+      <Route exact path="/" element={<TodoContainers />} >
+      </Route>
+      <Route exact path="/about" element={<About />} />
+      <Route exact path="/about/about-app" element={<SinglePage />} />
+      <Route exact path="/about/about-author" element={<SinglePage />} />
+      <Route exact path="*" element={<NotMatch />} />
+    </Routes>
+    </Fragment>
+    </>
   )
 }
 

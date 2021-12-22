@@ -2,15 +2,15 @@ import React from 'react'
 import ReactDOM from "react-dom"
 import { BrowserRouter as Router, Routes } from "react-router-dom"
 // components file
-import TodoIndex from './functionBased/components/TodoIndex'
+import TodoContainer from './functionBased/components/TodoContainer'
 
 // stylesheet
 import "./functionBased/App.css"
 
 
 ReactDOM.render(<React.StrictMode>
-    <Router>
-        <TodoIndex />
+    <Router basename={process.env.PUBLIC_URL}>
+        <TodoContainer />
     </Router>
     </React.StrictMode>, 
     document.getElementById("root"))

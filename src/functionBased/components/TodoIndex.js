@@ -3,10 +3,10 @@ import { Routes, Route, useLocation } from "react-router-dom"
 
 import About from "../../pages/About"
 import NotMatch from "../../pages/NotMatch"
-import TodoContainer from "../../pages/TodoContainer"
-import Navbar from "./Navbar"
+import TodoContainer from "./TodoContainer"
 
 import SinglePage from "../../pages/SinglePage"
+import Navbar from "./Navbar"
 
 const TodoIndex = () => {
   const location = useLocation();
