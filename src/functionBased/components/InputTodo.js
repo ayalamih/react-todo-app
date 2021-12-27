@@ -25,6 +25,8 @@ const InputTodo = (props) => {
             alert("Please write item")
         }
     }
+
+    console.log(useState("hello"));
     
     return (
         <form onSubmit={handleSubmit} className="form-container">
