@@ -1,17 +1,25 @@
 import React, { useState, useEffect, Fragment } from 'react'
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, useLocation } from "react-router-dom"
 
 import {v4 as uuidv4} from 'uuid'
 
-import TodosList from '../functionBased/components/TodosList'
-import Header from '../functionBased/components/Header'
-import InputTodo from '../functionBased/components/InputTodo'
+import TodosList from './TodosList'
+import Header from './Header'
+import InputTodo from './InputTodo'
+import Navbar from "./Navbar"
 
-import About from "./About"
-import NotMatch from "./NotMatch"
+import About from "../../pages/About"
+import NotMatch from "../../pages/NotMatch"
+import SinglePage from "../../pages/SinglePage"
 
-const TodoContainer = () => {
+const TodoContainers = () => {
   const [todos, setTodos] = useState(getInitialTodos())
+  const [ppi, setPpi] = useState({
+    p1:0,
+    p2:0
+  })
+
+  const newPpi = {p1: 1, p2: 1}
 
   const handleChange = id => {
     setTodos(prevState =>
@@ -42,6 +50,7 @@ const TodoContainer = () => {
       completed: false,
     }
     setTodos([...todos, newTodo])
+    setPpi(newPpi)
   }
 
   const setUpdate = (updatedTitle, id) => {
@@ -70,26 +79,43 @@ const TodoContainer = () => {
     return savedTodos || []
   }
 
-    useEffect(() => {
-      // storing todos items
-      const temp = JSON.stringify(todos)
-      localStorage.setItem("todos", temp)
-    }, [todos])
+  useEffect(() => {
+    // storing todos items
+    const temp = JSON.stringify(todos)
+    localStorage.setItem("todos", temp)
+  }, [todos])
+
+  function test() {
+    console.log("test test")
+  }
+
+  //useEffect(() => {
+  //  console.log("useEffect run")
+  //}, test(), [1212])
+
+  useEffect(() => {
+    console.log("Time ", new Date())
+  }, [])
+
+  useEffect(() => {
+    console.log("useEffect run", new Date())
+    console.log(ppi)
+  }, [ppi])
 
   return (
     <div className="container">
-      <div className="inner">
-        <Header />
-        <InputTodo addTodoProps={addTodoItem} />
-        <TodosList
-          todos={todos}
-          handleChangeProps={handleChange}
-          delTodoProps={delTodo}
-          setUpdate={setUpdate}
-        />
-      </div>
-    </div>
+          <div className="inner">
+            <Header />
+            <InputTodo addTodoProps={addTodoItem} />
+            <TodosList
+              todos={todos}
+              handleChangeProps={handleChange}
+              delTodoProps={delTodo}
+              setUpdate={setUpdate}
+            />
+          </div>
+        </div>
   )
 }
 
-export default TodoContainer
+export default TodoContainers
