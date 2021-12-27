@@ -47,8 +47,6 @@ const InputTodo = (props) => {
         }
     }
 
-    console.log(useState("hello"));
-    
     return (
         <form onSubmit={handleSubmit} className="form-container">
           <input
